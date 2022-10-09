@@ -1,0 +1,464 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  font-size: 62.5%;
+  --paragraph: #8A8A8A;
+  --description: #ACACAC;
+  --light-green: #945ab8;
+  --light-purple: #b862cf;
+  --background: #0c010e;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  background: var(--background);
+  color: #fff;
+  font-size: 1.2rem;
+}
+
+p.power {
+  width: fit-content;
+  padding: 0.5rem 1.6rem;
+  border-radius: 5rem;
+  background-color: #40dcbd;
+  filter: brightness(1.1);
+}
+
+.message {
+  text-align: center;
+}
+
+header {
+  display: grid;
+  width: 100%;
+  grid-template-columns: auto;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 5rem;
+}
+header h1#pokedex {
+  justify-self: center;
+  display: grid;
+  font-size: 5rem;
+  text-transform: capitalize;
+  width: fit-content;
+}
+header .search-img {
+  display: flex;
+}
+header .search-img .search {
+  width: 62em;
+  display: grid;
+  height: 5rem;
+  background: #FFFFFF;
+  opacity: 0.3;
+  border-radius: 0.8rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+header .search-img .search input {
+  width: 90%;
+  height: 100%;
+  border: none;
+  font-size: 2rem;
+  font-weight: 600;
+}
+header .search-img .search input:focus {
+  box-shadow: 0 0 0 0;
+  border: 0 none;
+  outline: 0;
+}
+header .search-img .search span {
+  color: black;
+  cursor: pointer;
+}
+header .search-img img {
+  margin-left: 2rem;
+  cursor: pointer;
+  width: 5rem;
+  height: 5rem;
+}
+header .search-img img#bagPokemon {
+  display: none;
+}
+header .search-img img:hover {
+  animation: shake 0.5s ease;
+}
+
+section.pokemons {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(30rem, auto));
+  column-gap: 2rem;
+  margin-inline: 8rem;
+}
+section.pokemons .card-pokemon {
+  width: 30rem;
+  height: 20rem;
+  padding: 2rem;
+  margin: 2rem;
+  border-radius: 3rem;
+  background-color: var(--light-green);
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  cursor: pointer;
+  background-image: url(../assets/pokebola.png);
+  background-repeat: no-repeat;
+  background-blend-mode: soft-light;
+  background-size: contain;
+  background-position: 130%;
+  transition: transform 0.5s ease;
+  z-index: 99;
+}
+section.pokemons .card-pokemon .items h3 {
+  margin-bottom: 1.5rem;
+  font-size: 2rem;
+  text-transform: capitalize;
+}
+section.pokemons .card-pokemon .items p.power:last-child {
+  margin-top: 0.8rem;
+}
+section.pokemons .card-pokemon img {
+  width: fit-content;
+  height: 100%;
+  padding: 1rem;
+  transition: transform 0.5s ease-in-out;
+}
+section.pokemons .card-pokemon:hover {
+  transform: scale(1.1);
+}
+section.pokemons .card-pokemon:hover img {
+  transform: scale(1.2);
+}
+
+.overlay {
+  content: "";
+  background: #373636;
+  opacity: 0.8;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 100vh;
+  z-index: 99;
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 101;
+  width: 45em;
+  height: 60em;
+  background-color: #40dcbd;
+  border-radius: 5rem;
+  margin: auto;
+  box-sizing: border-box;
+}
+.modal .icons {
+  display: flex;
+  justify-content: space-between;
+  align-content: center;
+  padding: 3rem;
+}
+.modal .icons img {
+  cursor: pointer;
+  width: 3rem;
+  height: 3rem;
+}
+.modal .icons i {
+  cursor: pointer;
+  margin: auto 0;
+}
+.modal .top-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 3rem;
+}
+.modal .top-info .description h4 {
+  font-size: 4rem;
+  text-transform: capitalize;
+}
+.modal .top-info .description .powers {
+  display: flex;
+  flex-direction: row;
+  margin-top: 1rem;
+  font-size: 1.4rem;
+  font-weight: bold;
+  text-shadow: 0.1em 0.1em 0.2em black;
+}
+.modal .top-info .description .power:last-child {
+  margin-left: 1rem;
+}
+.modal .top-info span {
+  font-size: 2.5rem;
+  font-weight: bold;
+}
+.modal img.pokemon {
+  position: relative;
+  left: 30%;
+  top: -2.8rem;
+  width: 20rem;
+  height: 20rem;
+  z-index: 3;
+}
+.modal .bottom-info {
+  background-color: #202020;
+  border-radius: 5rem;
+  position: relative;
+  bottom: 5rem;
+  width: 100%;
+  height: calc(50% + 1em);
+  padding: 2rem 5rem;
+  font-size: 1.6em;
+  z-index: 2;
+}
+.modal .bottom-info .options {
+  display: flex;
+  justify-content: space-between;
+  margin: 0 2rem;
+}
+.modal .bottom-info .options a {
+  text-decoration: none;
+  color: var(--description);
+  font-weight: bold;
+  cursor: pointer;
+  position: relative;
+  padding: 0.5rem 1.5rem;
+}
+.modal .bottom-info .options a.active {
+  color: white;
+  border-bottom: 2px solid white;
+}
+.modal .bottom-info .line {
+  top: 5.9rem;
+  position: absolute;
+  height: 2px;
+  left: 7rem;
+  width: 20.8em;
+  background: rgba(226, 226, 226, 0.5098039216);
+}
+.modal .bottom-info .descriptions .section {
+  margin: 1em;
+  display: flex;
+}
+.modal .bottom-info .descriptions .section .col-a {
+  color: var(--description);
+}
+.modal .bottom-info .descriptions .section .col-b {
+  margin-left: 8rem;
+  text-transform: capitalize;
+}
+.modal .bottom-info .descriptions .section.second .col-b {
+  margin-left: 5rem;
+}
+.modal .bottom-info .descriptions h4 {
+  margin: 1.5rem;
+}
+.modal .bottom-info .statsBox {
+  display: flex;
+  flex-direction: column;
+  text-transform: uppercase;
+}
+.modal .bottom-info .statsBox .stats {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  margin-top: 1rem;
+}
+.modal .bottom-info .statsBox .stats p {
+  width: 4.4rem;
+}
+.modal .bottom-info .statsBox .stats:first-of-type {
+  margin-top: 3rem;
+}
+.modal .bottom-info .statsBox .progressBox {
+  display: block;
+  width: 25rem;
+  height: 1.5rem;
+  border: 1px solid #000;
+  background: #000;
+  border-radius: 2rem;
+  position: relative;
+}
+.modal .bottom-info .statsBox .progressBox .progress {
+  display: block;
+  width: 55%;
+  height: 100%;
+  background: #497c43;
+  border-radius: 2rem;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.modal .bottom-info .movesBox {
+  padding: 3rem 3rem 3rem 2rem;
+  text-transform: capitalize;
+  justify-content: space-between;
+  display: flex;
+}
+.modal .bottom-info .movesBox .col-a {
+  display: flex;
+  flex-direction: column;
+}
+.modal .bottom-info .movesBox .col-b {
+  text-align: center;
+}
+.modal .bottom-info .movesBox p {
+  color: var(--description);
+  margin-top: 0.5rem;
+}
+
+.modal::before {
+  content: "";
+  z-index: -1;
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url(../assets/pokebola.png);
+  background-repeat: no-repeat;
+  opacity: 0.2;
+  background-size: auto;
+  background-position: 130%;
+}
+
+.to-top {
+  width: fit-content;
+  background: #2f013d;
+  padding: 1.5rem 2rem;
+  border-radius: 50%;
+  margin: 1rem;
+  position: fixed;
+  z-index: 101;
+  right: 1rem;
+  bottom: 0.2rem;
+  cursor: pointer;
+}
+.to-top a {
+  text-decoration: none;
+  color: white;
+}
+
+@keyframes shake {
+  0%, 100% {
+    transform: rotate(0deg);
+  }
+  20%, 60% {
+    transform: rotate(6deg);
+  }
+  40%, 80% {
+    transform: rotate(-6deg);
+  }
+}
+@media only screen and (max-width: 780px) {
+  .to-top {
+    padding: 1rem 1.5rem;
+  }
+
+  header {
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+  }
+  header h1#pokedex {
+    font-size: 3rem;
+    justify-self: left;
+    margin-bottom: 2rem;
+  }
+  header .search-img {
+    width: 100vw;
+    justify-content: center;
+  }
+  header .search-img .search {
+    height: 4rem;
+    width: 70%;
+    height: 3.5rem;
+  }
+  header .search-img .search input {
+    font-size: 1.4rem;
+  }
+  header .search-img img {
+    width: 3rem;
+    height: 3rem;
+  }
+
+  section.pokemons {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(12rem, auto));
+    margin-inline: 1rem;
+  }
+  section.pokemons .card-pokemon {
+    width: 13rem;
+    height: 13rem;
+    flex-direction: column;
+    background-size: 14rem;
+    background-position: -130%;
+    padding: 1.5rem;
+    margin: 1rem;
+  }
+  section.pokemons .card-pokemon .items h3 {
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+  }
+  section.pokemons .card-pokemon .items p {
+    font-size: 0.8rem;
+    padding: 0.2rem 0.8rem;
+  }
+  section.pokemons .card-pokemon img {
+    width: 9rem;
+    height: 9rem;
+    position: absolute;
+    top: 4.5rem;
+    left: 3.5rem;
+  }
+
+  .modal {
+    width: 25em;
+    height: 45em;
+  }
+  .modal .top-info .description h4 {
+    font-size: 2.5rem;
+  }
+  .modal .top-info .description .powers {
+    font-size: 1rem;
+  }
+  .modal .top-info span {
+    font-size: 1.5rem;
+  }
+  .modal img.pokemon {
+    left: 20%;
+  }
+  .modal .bottom-info {
+    font-size: 1rem;
+    padding: 2rem;
+    height: auto;
+  }
+  .modal .bottom-info .options {
+    margin: 0;
+  }
+  .modal .bottom-info .line {
+    left: 3rem;
+    top: 4.6rem;
+    width: 25em;
+  }
+  .modal .bottom-info .stats span {
+    margin-right: 1rem;
+  }
+}
+
+/*# sourceMappingURL=style.css.map */

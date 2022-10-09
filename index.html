@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles/style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="shortcut icon"
+      href="./assets/pokebola-favicon.png"
+      type="image/x-icon"
+    />
+    <title>Pokedex</title>
+  </head>
+  <body>
+    <header>
+      <h1 id="pokedex">Pokedex</h1>
+      <div class="search-img">
+        <div class="search">
+          <input type="text" placeholder="Digite o nome do pokemon..." />
+          <span
+            ><i class="fa-solid fa-magnifying-glass fa-2x" id="icon-search"></i
+          ></span>
+        </div>
+        <img src="./assets/backpack.png" alt="backpack-image" id="backpack" />
+        <img
+          src="./assets/bagPokemon.png"
+          alt="backpack-image"
+          id="bagPokemon"
+        />
+      </div>
+    </header>
+    <section class="pokemons"></section>
+    <div class="to-top">
+      <a href="#pokedex">
+      <i id="btn-to-top" class="fa-solid fa-arrow-up fa-1x"></i>
+    </a>
+    </div>
+    <script
+      src="https://kit.fontawesome.com/c60c2cfb59.js"
+      crossorigin="anonymous"
+    ></script>
+    <script type="module" src="main.js"></script>
+  </body>
+</html>
